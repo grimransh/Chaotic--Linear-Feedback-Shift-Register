@@ -1,4 +1,4 @@
-
+%% Bifurcation diagram of logistic map
 close all;
 r= linspace(2.4, 4,10000 );
 n = 1000;
