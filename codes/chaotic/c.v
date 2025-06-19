@@ -1,26 +1,21 @@
-`include "tb_c.v"
+module cmap_1(input clk,reset,
+    input [15:0] x_init,r,
+    output reg [15:0] out);
 
-module c (
-    input wire clk,
-    input wire rst,
-    output wire out
-);
+    reg [15:0] xn;
+    reg [31:0] temp1,temp2;
 
-    reg [15:0] x;
-    wire [31:0] x_base; //x * (1 - x)
-    wire [31:0] x_mult; //4 * x * (1 - x)
-    wire [15:0] x_next;
+    always @(posedge clk or reset) begin
+        if( reset ) begin
+            xn<=x_init;
+        end
 
-    assign x_base = x * (16'h7FFF - x);
-    assign x_mult = x_base << 2;
-    assign x_next = x_mult[30:15];
-    assign out = x_next[15];
-
-    always @(posedge clk or posedge rst) begin
-        if (rst)
-            x <= 16'd16384;
-        else
-            x <= x_next;
+        else begin
+            temp1<= xn*(16'd256-xn);      // 16'd256 = 00000001.00000000 = 1.0
+            temp2<= (r*temp1) >> 8;       // HERE RS by 8 bits because 8bits ka fractional part hai
+            xn<=temp2[15:0];
+        end
+        out <=xn;
     end
 
 endmodule
