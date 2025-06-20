@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-
+`include"lfsr.v"
 module tb_lfsr;
     reg clk;
     reg rst;
@@ -15,13 +15,12 @@ module tb_lfsr;
     always #5 clk = ~clk;
 
     initial begin
-
         $dumpfile("lfsr.vcd");
         $dumpvars(0, tb_lfsr);
-        $monitor(out);
-        clk = 0;
+        $monitor("time=%0t out=%b", $time, out);
+
         rst = 1;
-        #10;
+        #5;
         rst = 0;
 
         #1000;
