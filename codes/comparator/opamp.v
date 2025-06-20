@@ -1,0 +1,14 @@
+module opamp(in, out);
+    input signed [15:0] in;
+    output reg out;
+
+    always @(*) begin
+        if (in > 0) begin
+            out <= 0;
+        end
+        else begin
+            out <= 1;
+        end
+    end
+    
+endmodule
