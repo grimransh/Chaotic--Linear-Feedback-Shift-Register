@@ -13,8 +13,8 @@ module quadratic_Map ( input clk,reset,
 		else begin
 			xn_sq<= xn * xn;
 			r_ext <= r <<<15;   // 1.15 into 2.30
-			temp <= r_ext * xn_sq;
-			xn <= (16'h4000 - temp) >>> 15;
+			temp <= r_ext * xn_sq;   // r * xn^2 into 4.60 (need to downscale)
+			xn <= (16'sh7FFF - (temp >>> 30)); // Scaling back to 1.15
 		end
 
 		x_out <= xn;
