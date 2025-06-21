@@ -4,7 +4,7 @@ module quadratic_Map ( input clk,reset,
     reg signed [15:0] xn;
 	reg signed [31:0] xn_sq, r_ext, temp;
 
-	always @(posedge clk && reset) begin
+	always @(posedge clk) begin
 		
 		if(reset) begin
 			x_out<=xn;
