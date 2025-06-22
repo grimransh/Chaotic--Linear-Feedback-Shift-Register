@@ -1,4 +1,4 @@
-module opamp(in_P,in_N, out);
+module opamp(in, out);
     input signed [15:0] in;
     output reg out;
 
