@@ -68,14 +68,14 @@ module main(clk, rst, Rout, Gout, Bout, Key_ready);
             Glfsr <= {Glfsr[14:0], Gfeedback_lfsr};
             Blfsr <= {Blfsr[14:0], Bfeedback_lfsr};
             
-            // Rout <= {Rout[6:0], Rout_bit};
-            // Gout <= {Gout[6:0], Gout_bit};
-            // Bout <= {Bout[6:0], Bout_bit};
+            Rout <= {Rout[6:0], Rout_bit};
+            Gout <= {Gout[6:0], Gout_bit};
+            Bout <= {Bout[6:0], Bout_bit};
 
             if (bit_count == 3'd7) begin
-                Rout <= {Rout[6:0], Rout_bit};
-                Gout <= {Gout[6:0], Gout_bit};
-                Bout <= {Bout[6:0], Bout_bit};
+                // Rout <= {Rout[6:0], Rout_bit};
+                // Gout <= {Gout[6:0], Gout_bit};
+                // Bout <= {Bout[6:0], Bout_bit};
             
 
                 Key_ready <= 1;  // Byte is ready
