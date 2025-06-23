@@ -10,7 +10,7 @@ module quadratic(clk, rst, out);
 
 
     assign x_square = x * x;        // Q2.30
-    assign x_mult = x_square <<< 1;
+    assign x_mult = x_square <<< 1; // Multiply by 2
     assign x_next = 16'sh7FFF - x_mult[30:15];  // 16'h7FFF ~ +0.99997
     assign out = x_next;
     always @(posedge clk or posedge rst) begin
