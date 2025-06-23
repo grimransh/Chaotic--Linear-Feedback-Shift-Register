@@ -4,8 +4,8 @@ module quadratic(clk, rst, out);
     output wire [15:0]out;
 
     reg signed [15:0] x; 
-    wire signed [31:0] x_square;  // x(1-x)
-    wire signed [31:0] x_mult;  // 4 * x * (1 - x)
+    wire signed [31:0] x_square;  
+    wire signed [31:0] x_mult;
     wire signed [15:0] x_next;
 
 
