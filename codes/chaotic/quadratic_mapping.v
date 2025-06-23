@@ -1,6 +1,6 @@
 module quadratic_Map ( input clk,reset,              
 		input signed [15:0] x_in , r, 					// It is (-)1.15
-                output reg signed [15:0] x_out
+        output reg signed [15:0] x_out
 		);
        
 	reg signed [15:0] xn;
