@@ -3,9 +3,9 @@
 
 module tb_opamp;
     
-    reg [15:0] chaotic_value;
+    reg signed [15:0] chaotic_value;
 
-    wire out;
+    wire chaos_bit;
 
     opamp uut (
         chaotic_value,
@@ -13,19 +13,19 @@ module tb_opamp;
     );
 
     initial begin
-        $display("Time\tChaotic\tRef\tBit");
-        $monitor("%0dns\t%h\t%h\t%b", $time, chaotic_value, ref_value, chaos_bit);
+        $display("Time\tChaotic\tBit");
+        $monitor("%0dns\t%h\t%b", $time, chaotic_value, chaos_bit);
 
-        chaotic_value = 16'h0200;   // 2.0 in Q8.8
+        chaotic_value = 16'h4000;
         #10;
 
-        chaotic_value = 16'h0080;   // 0.5 in Q8.8
+        chaotic_value =  16'h2000;
         #10;
 
-        chaotic_value = 16'h0040;   // 0.25 in Q8.8
+        chaotic_value = 16'h8288;
         #10;
 
-        chaotic_value = 16'h0133;   // ~1.199
+        chaotic_value = 16'hE667;
         #10;
 
         $finish;

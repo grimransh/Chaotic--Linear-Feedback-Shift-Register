@@ -1,3 +1,4 @@
+`include "logistic_map.v"
 module testb;
     
     reg clk;
