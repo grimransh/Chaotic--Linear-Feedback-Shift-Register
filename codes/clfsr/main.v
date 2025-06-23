@@ -35,7 +35,7 @@ module main(clk, rst, out);
             lfsr <= {lfsr[14:0], feedback_lfsr};
             
             x_square <= x * x;                       // Q2.30
-            x_mult <= x_square <<< 1;
+            x_mult <= x_square <<< 1;                // Multiply by 2
             x_next <= 16'sh7FFF - x_mult[30:15];     // 16'h7FFF ~ +0.99997
             x <= x_next;
         end
