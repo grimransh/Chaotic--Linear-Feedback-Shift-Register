@@ -32,7 +32,7 @@ module tb_main;
     always @(posedge clk) begin
         if (Key_ready) begin
             // Write Rout, Gout, Bout to file in binary format
-            $fwrite(file, "%b%b%b\n", Rout, Gout, Bout);
+            $fwrite(file, "%b %b %b\n", Rout, Gout, Bout);
             count = count + 1;
         end
     end
