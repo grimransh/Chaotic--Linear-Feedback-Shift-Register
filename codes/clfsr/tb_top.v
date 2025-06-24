@@ -37,7 +37,7 @@ module tb_top;
         #20;
         rst = 0;
 
-        #10000000000; 
+        #10000000; 
         $display("Simulation finished.");
         $stop;
     end
