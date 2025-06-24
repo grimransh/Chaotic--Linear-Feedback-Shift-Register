@@ -16,9 +16,9 @@ def image_to_mem(image_path, output_prefix, size=(128, 128)):
         B.append(b)
 
     # Save .mem files in the same folder as this .py file
-    with open(os.path.join(script_dir, f'{output_prefix}_R.mem'), 'w') as fR, \
-         open(os.path.join(script_dir, f'{output_prefix}_G.mem'), 'w') as fG, \
-         open(os.path.join(script_dir, f'{output_prefix}_B.mem'), 'w') as fB:
+    with open(os.path.join(script_dir, f'{output_prefix}R.mem'), 'w') as fR, \
+         open(os.path.join(script_dir, f'{output_prefix}G.mem'), 'w') as fG, \
+         open(os.path.join(script_dir, f'{output_prefix}B.mem'), 'w') as fB:
         for i in range(len(R)):
             fR.write(f"{R[i]:02X}\n")
             fG.write(f"{G[i]:02X}\n")
@@ -28,4 +28,4 @@ def image_to_mem(image_path, output_prefix, size=(128, 128)):
 
 if __name__ == "__main__":
     # Path to image is relative to this script file
-    image_to_mem("../Images/antelope_128.jpg", "antelope")
+    image_to_mem("../Images/antelope_128.jpg", "")

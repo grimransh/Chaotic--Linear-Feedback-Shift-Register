@@ -24,11 +24,11 @@ module tb_top;
 
     always @(posedge uut.u_encrypt.done) begin
         $display("Encryption done. Saving output...");
-        $writememh("R_encrypted.mem", uut.u_encrypt.R_encrypt);
-        $writememh("G_encrypted.mem", uut.u_encrypt.G_encrypt);
-        $writememh("B_encrypted.mem", uut.u_encrypt.B_encrypt);
-        $display("Saved to R_encrypted.mem, G_encrypted.mem, B_encrypted.mem.");
-        $stop;
+        $writememh("R.mem", uut.u_encrypt.R_encrypt);
+        $writememh("G.mem", uut.u_encrypt.G_encrypt);
+        $writememh("B.mem", uut.u_encrypt.B_encrypt);
+        $display("Saved to R_out.mem, G_out.mem, B _out.mem.");
+        $finish;
     end
 
     initial begin
@@ -37,8 +37,8 @@ module tb_top;
         #20;
         rst = 0;
 
-        #1000000; 
+        # 13107200 ; 
         $display("Simulation finished.");
-        $stop;
+        $finish;
     end
 endmodule
