@@ -25,18 +25,24 @@ module encrypt (
     end
 
 
-    always @(posedge clk) begin
+    always @(posedge done) begin
+        $writememh("R_encrypted.mem", R_encrypt);
+        $writememh("G_encrypted.mem", G_encrypt);
+        $writememh("B_encrypted.mem", B_encrypt);
+    end
+
+    always @(posedge clk or posedge rst) begin
         if (rst) begin
             addr <= 0;
             done <= 0;
         end 
         else if (Key_ready && !done) begin
-            R_encrypt[addr] <= R_bytes[addr] + R_random;
-            G_encrypt[addr] <= G_bytes[addr] + G_random;
-            B_encrypt[addr] <= B_bytes[addr] + B_random;
+            R_encrypt[addr] <= R_bytes[addr] ^ R_random;
+            G_encrypt[addr] <= G_bytes[addr] ^ G_random;
+            B_encrypt[addr] <= B_bytes[addr] ^ B_random;
             addr <= addr + 1;
 
-            if (addr == 14'd16383) begin
+            if (addr == 15'd16383) begin
                 done <= 1;  // Finished updating memory
             end
         end
