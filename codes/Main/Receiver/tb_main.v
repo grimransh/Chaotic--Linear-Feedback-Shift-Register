@@ -1,4 +1,4 @@
-`include "Dencrypt.v"
+`include "Decrypt.v"
 `include "RandomNumberGenerator.v"
 `include"main.v"
 

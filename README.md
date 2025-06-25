@@ -10,27 +10,26 @@ This project integrates Python for image preprocessing and reconstruction, and V
 ```
 CHAOTIC--LINEAR-FEEDBACK-SHIFT-REGISTER/
 ├── codes/
-│   ├── Transmitter/
-│   │   ├── Encrypt.v
-│   │   ├── Main.v
-│   │   ├── RandomNumberGenerator.v
-│   │   ├── to_mem.py               # Converts image to .mem format (R/G/B)
-│   │   └── tb_main.v                # Encrypts image
-│   ├── Channel/
-│   │   └── for_encrypted_image.py   # Visualize encrypted image
-│   ├── Receiver/
-│   │   ├── Decrypt.v
-│   │   ├── Main.v
-│   │   ├── RandomNumberGenerator.v
-│   │   ├── tb_main.v                # Decrypts encrypted data
-│   │   └── decrypted_image.py       # Converts decrypted .mem back to image
-├── Images/
-│   ├── tree_128.jpg
-│   ├── bird_128.jpg
-│   └── ...
+│   │   ├── Transmitter/
+│   │   │   ├── Encrypt.v
+│   │   │   ├── Main.v
+│   │   │   ├── RandomNumberGenerator.v
+│   │   │   ├── to_mem.py               # Converts image to .mem format (R/G/B)
+│   │   │   └── tb_main.v                # Encrypts image
+│   │   ├── Channel/
+│   │   │   └── for_encrypted_image.py   # Visualize encrypted image
+│   │   ├── Receiver/
+│   │   │   ├── Decrypt.v
+│   │   │   ├── Main.v
+│   │   │   ├── RandomNumberGenerator.v
+│   │   │   ├── tb_main.v                # Decrypts encrypted data
+│   │   │   └── decrypted_image.py       # Converts decrypted .mem back to image
+│   ├── Images/
+│   │   ├── tree_128.jpg
+│   │   ├── bird_128.jpg
+│   │   └── ...
+│    ```   
 ```
-
----
 
 ## ▶️ Full Workflow
 
@@ -38,6 +37,7 @@ CHAOTIC--LINEAR-FEEDBACK-SHIFT-REGISTER/
 
 1. **Convert an image to `.mem` format**:
    ```bash
+   cd codes/Main/Transmitter
    python to_mem.py
    ```
    This generates:
@@ -47,7 +47,6 @@ CHAOTIC--LINEAR-FEEDBACK-SHIFT-REGISTER/
 
 2. **Run Verilog testbench to encrypt the image**:
    ```bash
-   cd codes/Transmitter
    iverilog -o tx.out tb_main.v
    vvp tx.out
    ```
