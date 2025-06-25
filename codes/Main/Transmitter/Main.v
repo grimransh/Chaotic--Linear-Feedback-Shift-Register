@@ -8,7 +8,7 @@ module main (
     wire Key_ready;
     wire done;
 
-    // Instantiate main module (LFSR + chaotic)
+    // Instantiate RandomNumberGenerator module (LFSR + chaotic)
     RandomNumberGenerator uut1 (
         .clk(clk),
         .rst(rst),

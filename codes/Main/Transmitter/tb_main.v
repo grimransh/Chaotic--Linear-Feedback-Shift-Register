@@ -1,6 +1,6 @@
 `include "Encrypt.v"
 `include "RandomNumberGenerator.v"
-`include"main.v"
+`include "main.v"
 
 `timescale 1ns/1ps
 
