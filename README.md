@@ -1,54 +1,147 @@
-# CLFSR_system
-🔐 CLFSR Encryption System A Chaotic Linear Feedback Shift Register (CLFSR) based encryption system that combines the simplicity of LFSR-based pseudo-random number generation with the unpredictability of chaotic maps. This hybrid system aims to enhance security for lightweight cryptographic applications such as image encryption, secure communication, and embedded systems.
+# Chaotic Linear Feedback Shift Register (CLFSR)
 
-📘 Overview The CLFSR Encryption System incorporates:
+A hybrid image encryption–decryption system using **Chaotic Maps + Linear Feedback Shift Registers (LFSRs)**.  
+This project integrates Python for image preprocessing and reconstruction, and Verilog (Icarus Verilog) for secure bit-level encryption.
 
-Linear Feedback Shift Register (LFSR): A basic shift register with XOR-based feedback to generate pseudo-random sequences.
+---
 
-Chaotic Map (e.g., Logistic Map): A deterministic nonlinear map that generates complex, non-repeating outputs.
+## 📁 Project Structure
 
-XOR-based Encryption: The plaintext is encrypted using a keystream generated from the CLFSR.
+```
+CHAOTIC--LINEAR-FEEDBACK-SHIFT-REGISTER/
+├── Main/
+│   ├── Transmitter/
+│   │   ├── Encrypt.v
+│   │   ├── Main.v
+│   │   ├── RandomNumberGenerator.v
+│   │   ├── to_mem.py               # Converts image to .mem format (R/G/B)
+│   │   └── tb_main.v                # Encrypts image
+│   ├── Channel/
+│   │   └── for_encrypted_image.py   # Visualize encrypted image
+│   ├── Receiver/
+│   │   ├── Decrypt.v
+│   │   ├── Main.v
+│   │   ├── RandomNumberGenerator.v
+│   │   ├── tb_main.v                # Decrypts encrypted data
+│   │   └── decrypted_image.py       # Converts decrypted .mem back to image
+├── Images/
+│   ├── tree_128.jpg
+│   ├── bird_128.jpg
+│   └── ...
+```
 
-This project includes:
+---
 
-HDL implementation (Verilog or VHDL)
+## ▶️ Full Workflow
 
-MATLAB/Python simulation models
+### 🔒 1. Transmitter Phase (Encryption)
 
-Testbenches for verification
+1. **Convert an image to `.mem` format**:
+   ```bash
+   python to_mem.py
+   ```
+   This generates:
+   - `R.mem`
+   - `G.mem`
+   - `B.mem`
 
-Performance analysis (NPCR, UACI, entropy, histogram)
+2. **Run Verilog testbench to encrypt the image**:
+   ```bash
+   cd codes/Transmitter
+   iverilog -o tx.out tb_main.v
+   vvp tx.out
+   ```
+   This produces:
+   - `R_encrypted.mem`
+   - `G_encrypted.mem`
+   - `B_encrypted.mem`
 
-🛠 Features Hybrid pseudo-random number generation using chaos + LFSR
+3. **Move encrypted files to Channel**:
+   ```bash
+   mv *_encrypted.mem ../Channel/
+   ```
 
-Lightweight encryption suitable for FPGA or ASIC
+---
 
-Configurable chaotic map parameters (e.g., logistic map r and initial x)
+### 📡 2. Channel Phase (Visualization)
 
-Bitwise XOR encryption and decryption
+1. **Visualize encrypted image**:
+   ```bash
+   cd ../Channel
+   python for_encrypted_image.py
+   ```
+2. **Move encrypted files to Receiver**:
+   ```bash
+   mv *_encrypted.mem ../Receiver/
+   ```
+   ➜ The Encrypted output image will be saved in the same folder.
 
-Simulation and analysis scripts
 
-Test cases and example usage
+---
 
-🚀 Getting Started Requirements For Simulation:
+### 🔓 3. Receiver Phase (Decryption)
 
-MATLAB or Python 3.x (for algorithm simulation)
+1. **Run Verilog testbench to decrypt**:
+   ```bash
+   cd ../Receiver
+   iverilog -o rx.out tb_main.v
+   vvp rx.out
+   ```
+   This creates:
+   - `R_decrypted.mem`
+   - `G_decrypted.mem`
+   - `B_decrypted.mem`
 
-Verilog/VHDL simulation tools (e.g., ModelSim, Vivado)
+2. **Convert `.mem` files back to an image**:
+   ```bash
+   python decrypted_image.py
+   ```
 
-For Hardware:
+   ➜ The final output image will be saved in the same folder.
 
-FPGA (e.g., Xilinx Spartan, Artix series)
+---
 
-Vivado / Quartus toolchain
+## 🖼️ How to Change the Input Image
 
-HDL Simulation Run testbench for clfsr.v or clfsr.vhdl
+1. Open `codes/transmitter/to_mem.py`
+2. Modify the image file path:
+   ```python
+   image_path = "../Images/tree_128.jpg"
+   ```
+3. You can use any `*_128.jpg` file from the `Images/` folder.  
+   **Ensure it is 128x128 pixels in size.**
 
-Use waveform to verify output
+---
 
-Check encryption/decryption match
+## ⚙️ Requirements
 
-🔒 Security Metrics Metric Description NPCR Measures pixel change rate between original and cipher UACI Measures intensity difference Entropy Measures randomness Histogram Uniformity check of cipher output
+- Python 3.x
+- Icarus Verilog (install via `apt`, `brew`, or from source)
+- Python dependencies:
+  ```bash
+  pip install pillow numpy
+  ```
 
-✍️ Author Shivam Sikri Student of ECE BTech in NIT KURUKSHTRA Email: shivamsikri36@gmail.com
+---
+
+## ✅ Summary of File Flow
+
+| Stage         | Inputs           | Outputs                   |
+|---------------|------------------|---------------------------|
+| Python Input   | `.jpg` image     | `R.mem`, `G.mem`, `B.mem` |
+| Verilog TX    | R/G/B `.mem`     | `R_encrypted.mem`, etc.   |
+| Channel       | Encrypted `.mem` | Visual confirmation       |
+| Verilog RX    | Encrypted `.mem` | `decrypted_R/G/B.mem`     |
+| Python Output | Decrypted `.mem` | Final reconstructed image |
+
+---
+
+<!-- ## 🧪 Possible Enhancements
+
+- Add support for different chaotic maps (Tent, Sine, Bernoulli)
+- Add automation script for the full pipeline
+- Integrate NIST randomness test suite
+- Add waveform viewer with `gtkwave` -->
+
+---
+
