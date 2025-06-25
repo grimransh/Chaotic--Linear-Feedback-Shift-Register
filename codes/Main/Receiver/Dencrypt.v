@@ -1,4 +1,4 @@
-module encrypt (
+module Dencrypt (
     input clk,
     input rst,
     input Key_ready,

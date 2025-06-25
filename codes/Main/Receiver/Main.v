@@ -19,7 +19,7 @@ module main (
     );
 
     // Instantiate encrypt module
-    encrypt uut2 (
+    Dencrypt uut2 (
         .clk(clk),
         .rst(rst),
         .Key_ready(Key_ready),
