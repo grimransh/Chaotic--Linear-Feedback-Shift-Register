@@ -9,7 +9,7 @@ This project integrates Python for image preprocessing and reconstruction, and V
 
 ```
 CHAOTIC--LINEAR-FEEDBACK-SHIFT-REGISTER/
-├── Main/
+├── codes/
 │   ├── Transmitter/
 │   │   ├── Encrypt.v
 │   │   ├── Main.v
