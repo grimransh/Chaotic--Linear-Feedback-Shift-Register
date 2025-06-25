@@ -25,11 +25,11 @@ module encrypt (
     end
 
 
-    always @(posedge done) begin
-        $writememh("R_encrypted.mem", R_encrypt);
-        $writememh("G_encrypted.mem", G_encrypt);
-        $writememh("B_encrypted.mem", B_encrypt);
-    end
+    // always @(posedge done) begin
+    //     $writememh("R_encrypted.mem", R_encrypt);
+    //     $writememh("G_encrypted.mem", G_encrypt);
+    //     $writememh("B_encrypted.mem", B_encrypt);
+    // end
 
     always @(posedge clk or posedge rst) begin
         if (rst) begin

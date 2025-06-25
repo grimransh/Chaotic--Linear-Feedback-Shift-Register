@@ -1,4 +1,4 @@
-module main(clk, rst, Rout, Gout, Bout, Key_ready);
+module RandomNumberGenerator(clk, rst, Rout, Gout, Bout, Key_ready);
     input wire clk;
     input wire rst;
     output reg [7:0] Rout;

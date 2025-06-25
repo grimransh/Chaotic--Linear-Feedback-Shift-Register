@@ -1,4 +1,4 @@
-module top (
+module main (
     input clk,
     input rst
 );
@@ -9,7 +9,7 @@ module top (
     wire done;
 
     // Instantiate main module (LFSR + chaotic)
-    main u_main (
+    RandomNumberGenerator uut1 (
         .clk(clk),
         .rst(rst),
         .Rout(R_random),
@@ -19,7 +19,7 @@ module top (
     );
 
     // Instantiate encrypt module
-    encrypt u_encrypt (
+    encrypt uut2 (
         .clk(clk),
         .rst(rst),
         .Key_ready(Key_ready),
